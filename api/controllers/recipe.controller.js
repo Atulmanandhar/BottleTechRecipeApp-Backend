@@ -23,7 +23,7 @@ exports.createRecipe = async (req, res) => {
   const recipe = new Recipe({
     _id: new mongoose.Types.ObjectId(),
     name,
-    ingredients,
+    ingredients: JSON.parse(ingredients),
     steps,
     imageUrl: recipeImageLink,
   });

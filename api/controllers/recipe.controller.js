@@ -16,7 +16,7 @@ exports.createRecipe = async (req, res) => {
     });
   }
   const { name, ingredients, steps } = req.body;
-  const urlScheme = DEBUG ? req.protocol + "://" : "";
+  const urlScheme = req.protocol + "://";
   const filePath = req.file.path.replace(/\\/g, "/");
   const recipeImageLink = urlScheme + req.headers.host + "/" + filePath;
 
@@ -46,7 +46,10 @@ exports.createRecipe = async (req, res) => {
 
 exports.getRecipe = async (req, res) => {
   try {
-    const recipe = await Recipe.find().select("-__V").exec();
+    const recipe = await Recipe.find()
+      .sort({ createdAt: "desc" })
+      .select("-__V")
+      .exec();
     res.status(200).json({
       data: recipe,
       success: true,

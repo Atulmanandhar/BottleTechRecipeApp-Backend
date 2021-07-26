@@ -16,7 +16,7 @@ exports.createRecipe = async (req, res) => {
     });
   }
   const { name, ingredients, steps } = req.body;
-  const urlScheme = req.protocol + "://";
+  const urlScheme = "https://";
   const filePath = req.file.path.replace(/\\/g, "/");
   const recipeImageLink = urlScheme + req.headers.host + "/" + filePath;
 
